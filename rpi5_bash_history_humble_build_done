@@ -1,0 +1,141 @@
+docker run hello-world
+mkdir docker
+cd docker/
+mkdir docker
+mv docker_ros/ docker/docker_ros
+cd ~/docker/docker_ros/
+touch Dockerfile
+echo 'FROM osrf/ros:noetic-desktop-full' > Dockerfile && echo 'ARG USER=user' >> Dockerfile && echo 'ARG DEBIAN_FRONTEND=noninteractive' >> Dockerfile && echo 'RUN apt-get update && apt-get install -y ros-noetic-moveit ros-noetic-ros-controllers ros-noetic-gazebo-ros-control ros-noetic-rosserial ros-noetic-rosserial-arduino ros-noetic-roboticsgroup-upatras-gazebo-plugins ros-noetic-actionlib-tools terminator python3-pip && rm -rf /var/lib/apt/lists/*' >> Dockerfile && echo 'RUN pip install flask flask-ask-sdk ask-sdk' >> Dockerfile && echo 'WORKDIR /home/${USER}' >> Dockerfile
+nano Dockerfile 
+docker build ~/docker/docker_ros/ -t ros-noetic-container
+sudo apt update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo usermod -aG docker $USER
+newgrp docker
+cd ~/docker/docker_ros/
+docker build ~/docker/docker_ros/ -t ros-noetic-container
+docker run -it ros-noetic-container
+docker build ~/docker/docker_ros/ -t ros-noetic-container
+docker image prune -f
+docker run -it ros-noetic-container --device=/dev/video0:/dev/video0
+docker run -it --device=/dev/video0:/dev/video0 ros-noetic-container
+docker run -it --network host --device=/dev/video0:/dev/video0 ros-noetic-container
+docker image prune -a
+catkin_make
+docker buildx prune 
+docker run -it ros-noetic-container
+docker system prune -f
+docker run -it --network host --device=/dev/video0:/dev/video0 -v /home/karl/catkin_ws/:/home/user/catkin_ws/ ros-noetic-container
+docker run -it --network host --device=/dev/video0:/dev/video0 -v /home/karl/catkin_ws/:/home/user/catkin_ws/ -v /home/karl/temp_ws/:/home/user/temp_ws/ ros-noetic-container
+docker build ~/docker/docker_ros/ -t ros-noetic-container
+docker system prune -f
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+sudo apt update && sudo apt install -y   python3-flake8-docstrings   python3-pip   python3-pytest-cov   ros-dev-tools
+sudo apt install -y git colcon python3-rosdep2 vcstool wget python3-flake8-docstrings python3-pip python3-pytest-cov python3-flake8-blind-except python3-flake8-builtins python3-flake8-class-newline python3-flake8-comprehensions python3-flake8-deprecated python3-flake8-import-order python3-flake8-quotes python3-pytest-repeat python3-pytest-rerunfailures python3-vcstools libx11-dev libxrandr-dev libasio-dev libtinyxml2-dev
+mkdir -p ~/ros2_humble/src
+cd ros2_humble/
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src
+cd ~/ros2_humble/src/ros-visualization/
+touch COLCON_IGNORE
+cd ~/ros2_humble/src/ros-planning/
+cd ~/ros2_humble/src/ros2/rviz/
+touch COLCON_IGNORE
+cd ~/ros2_humble/src/ros2/demos/
+touch COLCON_IGNORE
+cd ~/ros2_humble/src/ros2/examples/
+touch COLCON_IGNORE
+cd ~
+sudo mv /etc/ros/rosdep/sources.list.d/20-default.list ~/20-default.list.bu
+cd ros2_humble/
+sudo apt upgrade
+cd ~/ros2_humble/
+sudo rosdep init
+rosdep update
+rosdep install --from-paths src --ignore-src --rosdistro iron -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers python3-vcstool"
+colcon build --symlink-install
+sudo apt install -y git colcon python3-rosdep2 vcstool wget python3-flake8-docstrings python3-pip python3-pytest-cov python3-flake8-blind-except python3-flake8-builtins python3-flake8-class-newline python3-flake8-comprehensions python3-flake8-deprecated python3-flake8-import-order python3-flake8-quotes python3-pytest-repeat python3-pytest-rerunfailures python3-vcstools libx11-dev libxrandr-dev libasio-dev libtinyxml2-dev
+whereis cmake
+PATH="$PATH:/usr/share/cmake"
+colcon build --symlink-install
+PATH="$PATH:/usr/share"
+colcon build --symlink-install
+PATH="$PATH:/usr/lib/aarch64-linux-gnu/"
+cmake
+sudo apt install cmake
+echo $PATH
+cd ~/ros2_humble/
+colcon build --symlink-install
+cd src/eclipse-iceoryx/
+touch COLCON_IGNORE
+cd ~/ros2_humble/
+touch COLCON_IGNORE
+rm COLCON_IGNORE 
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros2/orocos_kdl_vendor/
+touch COLCON_IGNORE
+cd ~/ros2_humble/
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros2/rosidl/rosidl_generator_c/
+touch COLCON_IGNORE
+cd ~/ros2_humble/
+colcon build --symlink-install
+pip3 install lark
+sudo apt install python3-lark
+cd ~/ros2_humble/src/ros2/
+rm COLCON_IGNORE 
+cd ~/ros2_humble/
+colcon build --symlink-install
+sudo apt install pkg-config 
+colcon build --symlink-install
+rosdep install --from-paths src --ignore-src --rosdistro humble -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers python3-vcstool"
+rosdep install --from-paths src --ignore-src --rosdistro humble -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers python3-vcstool" --os=ubuntu:jammy
+cd ros2_humble/
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros/kdl_parser/
+touch COLCON_IGNORE
+cd ~/ros2_humble
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros2/orocos_kdl_vendor/
+rm COLCON_IGNORE 
+cd ~/ros2_humble
+colcon build --symlink-install
+nano ~/ros2_humble/src/ros-tooling/libstatistics_collector/include/libstatistics_collector/moving_average_statistics/types.hpp 
+#Added #include <cstdint>
+colcon build --symlink-install
+#https://robotics.stackexchange.com/questions/104322/building-ros2-humble-on-macos-fails-due-to-old-pybind11
+sudo apt install python3-pybind11 
+colcon build --symlink-install
+cd ros2_humble/src/ros2/orocos_kdl_vendor/python_orocos_kdl_vendor/
+nano CMakeLists.txt 
+nano package.xml 
+colcon build --symlink-install
+nano ros2_humble/src/ros2/rosbag2/rosbag2_compression/include/rosbag2_compression/compression_options.hpp
+nano ~/ros2_humble/src/ros2/rosbag2/rosbag2_compression/include/rosbag2_compression/compression_options.hpp
+#Add #include <cstdint>
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros/ros_tutorials/turtlesim/ && touch COLCON_IGNORE && cd ~/ros2_humble
+colcon build --symlink-install
+sudo apt install libbullet3.24 
+colcon build --symlink-install
+sudo apt install libbullet-dev 
+colcon build --symlink-install
+cd ~/ros2_humble/src/ros/kdl_parser/ && rm COLCON_IGNORE && cd ~/ros2_humble
+colcon build --symlink-install
+du --all --human-readable --one-file-system --max-depth=1 .
+du --all --human-readable --one-file-system --max-depth=1 /
+du --all --human-readable --one-file-system --max-depth=1 /usr
+du --all --human-readable --one-file-system --max-depth=1 /usr/lib
+du --all --human-readable --one-file-system --max-depth=1 /usr/lib | sort -k1 -rh
